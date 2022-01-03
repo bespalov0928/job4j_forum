@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <body>
 <c:if test="${not empty errorMessage}">
@@ -8,27 +7,7 @@
             ${errorMessage}
     </div>
 </c:if>
-
-
-<%--<form:form action="<c:url value='/reg'/>" method='POST' modelAttribute="user">--%>
-    <%--User Name: <form:input type="text" path="username" />--%>
-    <%--&lt;%&ndash;<br>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<br>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;Email: <form:input type="email" path="email" style="margin-left:34px;" />&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<br>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<br>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;Password: <form:input type="password" path="password"  style="margin-left:10px;" />&ndash;%&gt;--%>
-    <%--<br>--%>
-    <%--<br>--%>
-    <%--Confirm Password: <form:input type="password" path="password" />--%>
-    <%--<br>--%>
-    <%--<br>--%>
-    <%--<input type="submit" value="Register">--%>
-<%--</form:form>--%>
-
-
-
-<form action="<c:url value='/reg'/>" method='POST' modelAttribute="user">
+<form name='login' action="<c:url value=''/>" method='POST'>
     <table>
         <tr>
             <td>UserName:</td>
@@ -39,9 +18,10 @@
             <td><input type='password' name='password'/></td>
         </tr>
         <tr>
-            <td colspan='2'><input name="submit" type="submit" value="Зарегистрироваться" /></td>
+            <td colspan='2'><input name="submit" type="submit" value="submit" /></td>
         </tr>
     </table>
 </form>
 </body>
 </html>
+

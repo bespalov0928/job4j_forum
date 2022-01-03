@@ -19,7 +19,7 @@
                 <td>Название:</td>
                 <td><input type="text" name="name"></td>
             </tr>
-           <tr>
+            <tr>
                 <td>Описание:</td>
                 <td><input type="text" name="description"></td>
             </tr>

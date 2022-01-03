@@ -3,16 +3,17 @@ package ru.job4j.forum.service;
 import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserService {
-    public final List<User> users = new ArrayList<>();
+    private static int USER_COUNT;
+    public final Map<Integer, User> users = new HashMap<Integer, User>();
 
 
     public List<User> getAllUser() {
-        return users;
+        List valueList = new ArrayList(users.values());
+        return valueList;
     }
 
     public User findByUserName(String username) {
@@ -28,6 +29,6 @@ public class UserService {
     }
 
     public void saveUser(User user) {
-        users.add(user);
+        users.put(++USER_COUNT, user);
     }
 }

@@ -1,58 +1,42 @@
 package ru.job4j.forum.control;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import ru.job4j.forum.model.User;
-import ru.job4j.forum.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginControl {
-
-    private final UserService users;
-
-    public LoginControl(UserService users) {
-        this.users = users;
-    }
 
     @GetMapping("/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error,
                             @RequestParam(value = "logout", required = false) String logout,
                             Model model) {
-        String errorMessage = null;
-        if (error != null) {
-            errorMessage = "Username or Password is incorrect !!";
+        String errorMessge = null;
+        if(error != null) {
+            errorMessge = "Username or Password is incorrect !!";
         }
-        if (logout != null) {
-            errorMessage = "You have been successfully logged out !!";
+        if(logout != null) {
+            errorMessge = "You have been successfully logged out !!";
         }
-        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorMessge", errorMessge);
         return "login";
     }
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String logoutPage(HttpServletRequest request, Model model) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        User rsl = users.findByUserName(username);
-        System.out.println("rsl: " + rsl);
-        String errorMessage = null;
-        if (rsl == null) {
-            System.out.println("userName: " + username);
-            errorMessage = "user is not in the database !!";
-            model.addAttribute("errorMessage", errorMessage);
-            return "login";
-        }if (rsl != null & !rsl.getPassword().equals(password)){
-            System.out.println("password: " + password);
-            errorMessage = "password does not match !!";
-            model.addAttribute("errorMessage", errorMessage);
-            return "login";
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-
-        return "redirect:/index";
+        return "redirect:/login?logout=true";
     }
 
 }

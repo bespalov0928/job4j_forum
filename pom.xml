@@ -28,7 +28,7 @@
     </properties>
 
 
-     <dependencies>
+    <dependencies>
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -60,7 +60,7 @@
             <version>${spring.version}</version>
         </dependency>
 
-         <dependency>
+        <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
             <!--<version>10.1.0-M8</version>-->
@@ -80,26 +80,32 @@
             <scope>test</scope>
         </dependency>
 
-          <dependency>
-             <groupId>org.springframework.security</groupId>
-             <artifactId>spring-security-core</artifactId>
-             <version>5.6.1</version>
-         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.6.1</version>
+        </dependency>
 
-         <dependency>
-             <groupId>org.springframework.security</groupId>
-             <artifactId>spring-security-web</artifactId>
-             <version>5.6.1</version>
-         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.6.1</version>
+        </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
-     </dependencies>
+    </dependencies>
 
     <build>
         <finalName>job4j_forum</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
-                  <plugin>
+                <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>

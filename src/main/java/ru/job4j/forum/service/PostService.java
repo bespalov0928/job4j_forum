@@ -4,20 +4,20 @@ import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.model.User;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PostService {
-    private final List<Post> posts = new ArrayList<>();
+    private static int POST_COUNT;
+    private final Map<Integer, Post> posts = new HashMap();
 
     public PostService() {
-        posts.add(Post.of("Продаю машину ладу 01."));
+        posts.put(++POST_COUNT, Post.of("Продаю машину ладу 01."));
     }
 
     public List<Post> getAll() {
-        return posts;
+        List<Post> rsl = new ArrayList(posts.values());
+        return rsl;
     }
 
     public void add(Post post, String[] idArr) {
@@ -29,9 +29,10 @@ public class PostService {
             return;
         }
         Post postNew = Post.of(post.getName());
+        postNew.setId(++POST_COUNT);
         postNew.setDescription(post.getDescription());
         postNew.setCreated(Calendar.getInstance());
-        posts.add(postNew);
+        posts.put(postNew.getId(), postNew);
         postNew.setId(posts.size() - 1);
     }
 
