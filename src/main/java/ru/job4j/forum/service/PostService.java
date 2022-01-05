@@ -5,14 +5,15 @@ import ru.job4j.forum.model.Post;
 import ru.job4j.forum.model.User;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class PostService {
-    private static int POST_COUNT;
+    private static AtomicInteger POST_COUNT = new AtomicInteger(0);
     private final Map<Integer, Post> posts = new HashMap();
 
     public PostService() {
-        posts.put(++POST_COUNT, Post.of("Продаю машину ладу 01."));
+        posts.put(POST_COUNT.getAndIncrement(), Post.of("Продаю машину ладу 01."));
     }
 
     public List<Post> getAll() {
@@ -29,7 +30,7 @@ public class PostService {
             return;
         }
         Post postNew = Post.of(post.getName());
-        postNew.setId(++POST_COUNT);
+        postNew.setId(POST_COUNT.getAndIncrement());
         postNew.setDescription(post.getDescription());
         postNew.setCreated(Calendar.getInstance());
         posts.put(postNew.getId(), postNew);

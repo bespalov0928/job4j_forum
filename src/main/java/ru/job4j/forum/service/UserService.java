@@ -4,10 +4,11 @@ import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.User;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class UserService {
-    private static int USER_COUNT;
+    private static AtomicInteger USER_COUNT;
     public final Map<Integer, User> users = new HashMap<Integer, User>();
 
 
@@ -29,6 +30,6 @@ public class UserService {
     }
 
     public void saveUser(User user) {
-        users.put(++USER_COUNT, user);
+        users.put(USER_COUNT.getAndIncrement(), user);
     }
 }
