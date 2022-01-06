@@ -7,7 +7,7 @@
             ${errorMessage}
     </div>
 </c:if>
-<form name='login' action="<c:url value=''/>" method='POST'>
+<form name='login' action="<c:url value='/reg'/>" method='POST'>
     <table>
         <tr>
             <td>UserName:</td>
@@ -18,7 +18,7 @@
             <td><input type='password' name='password'/></td>
         </tr>
         <tr>
-            <td colspan='2'><input name="submit" type="submit" value="submit" /></td>
+            <td colspan='2'><input name="submit" type="submit" value="Зарегистрироваться" /></td>
         </tr>
     </table>
 </form>

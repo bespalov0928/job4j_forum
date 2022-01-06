@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class UserService {
-    private static AtomicInteger USER_COUNT;
+    private static AtomicInteger USER_COUNT = new AtomicInteger(0);
     public final Map<Integer, User> users = new HashMap<Integer, User>();
 
 

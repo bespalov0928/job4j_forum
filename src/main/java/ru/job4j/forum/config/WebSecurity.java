@@ -20,9 +20,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder)
-                .withUser("user").password(passwordEncoder.encode("123456"))
+                .withUser("user").password(passwordEncoder.encode("123456")).roles("USER")
                 .and()
-                .withUser("admin").password(passwordEncoder.encode("123456"));
+                .withUser("admin").password(passwordEncoder.encode("123456")).roles("USER", "ADMIN");
     }
 
     @Bean
@@ -33,7 +33,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login")
+                .antMatchers("/login", "/reg")
                 .permitAll()
                 .antMatchers("/**")
                 .hasAnyRole("ADMIN", "USER")

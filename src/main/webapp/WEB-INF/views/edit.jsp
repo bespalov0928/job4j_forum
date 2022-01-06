@@ -31,13 +31,14 @@
         <tr>
             <td>Обсуждения:</td>
             <td>
-                <textarea name="discussion" value="${post.discussion}"
-                          style="padding-bottom:250px;
-                            font-size:16px;
-                            height: 300px;
-                            width: 500px;">
-
-                </textarea>
+                <input type="text" name="discussion" value="${post.discussion}">
+<%--                <textarea name="discussion" value="${post.discussion}"--%>
+<%--                          style="padding-bottom:250px;--%>
+<%--                            font-size:16px;--%>
+<%--                            height: 300px;--%>
+<%--                            width: 500px;"--%>
+<%--                >--%>
+<%--                </textarea>--%>
             </td>
         </tr>
         <tr hidden="true">
@@ -45,7 +46,7 @@
         </tr>
         <tr>
             <td>
-                <input name="submit" type="submit" value="Сохранить">
+                <input name="submit" type="submit" value="Обновить">
             </td>
         </tr>
     </table>
