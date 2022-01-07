@@ -13,9 +13,9 @@
     <title>Форум job4j</title>
 </head>
 <body>
-<%--<div>--%>
-<%--Login as ${user.username}--%>
-<%--</div>--%>
+<div>
+    Login as ${user.username}
+</div>
 <br>
 <a href="<c:url value='/login'/>">Авторизация</a>
 <br>

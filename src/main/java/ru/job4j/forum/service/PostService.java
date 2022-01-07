@@ -2,44 +2,43 @@ package ru.job4j.forum.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.Post;
-import ru.job4j.forum.model.User;
+import ru.job4j.forum.store.PostRepository;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class PostService {
-    private static AtomicInteger POST_COUNT = new AtomicInteger(0);
-    private final Map<Integer, Post> posts = new HashMap();
+    private final PostRepository posts;
 
-    public PostService() {
-        posts.put(POST_COUNT.getAndIncrement(), Post.of("Продаю машину ладу 01."));
+    public PostService(PostRepository posts) {
+        this.posts = posts;
     }
 
     public List<Post> getAll() {
-        List<Post> rsl = new ArrayList(posts.values());
+        List<Post> rsl = new ArrayList<>();
+        posts.findAll().forEach(rsl::add);
         return rsl;
     }
 
     public void add(Post post, String[] idArr) {
+
         if (idArr != null) {
-            Post postOld = posts.get(Integer.parseInt(idArr[0]));
+            Post postOld = posts.findById(Integer.valueOf(idArr[0])).get();
             postOld.setName(post.getName());
             postOld.setDescription(post.getDescription());
             postOld.setDiscussion(post.getDiscussion());
             return;
         }
         Post postNew = Post.of(post.getName());
-        postNew.setId(POST_COUNT.getAndIncrement());
         postNew.setDescription(post.getDescription());
         postNew.setCreated(Calendar.getInstance());
-        posts.put(postNew.getId(), postNew);
-        postNew.setId(posts.size() - 1);
+        postNew.setDiscussion(post.getDiscussion());
+        posts.save(postNew);
     }
 
     public Post findById(int id) {
-        Post rsl;
-        rsl = posts.get(id);
+        Post rsl = null;
+        rsl = posts.findById(id).get();
         return rsl;
     }
 
