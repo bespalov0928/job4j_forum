@@ -36,7 +36,7 @@ public class PostControl {
     public String editPost(@RequestParam("id") int id, Model model) {
         Post post = posts.findById(id);
         model.addAttribute("post", post);
-        return "/edit";
+        return "edit";
     }
 
 
