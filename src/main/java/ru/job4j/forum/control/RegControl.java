@@ -14,12 +14,10 @@ public class RegControl {
 
     private final PasswordEncoder encoder;
     private final UserService users;
-    private final AuthorityRepository authorities;
 
-    public RegControl(PasswordEncoder encoder, UserService users, AuthorityRepository authorities) {
+    public RegControl(PasswordEncoder encoder, UserService users) {
         this.encoder = encoder;
         this.users = users;
-        this.authorities = authorities;
     }
 
     @GetMapping("/reg")
@@ -28,15 +26,14 @@ public class RegControl {
     }
 
     @RequestMapping(value = "/reg", method= RequestMethod.POST)
-    public String regSave(@ModelAttribute("user") User user, Model model){
+    public String regSave(@ModelAttribute("user") User user){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String pwd = encoder.encode(user.getPassword());
 
         user.setEnabled(true);
         user.setPassword(pwd);
         user.setUsername(user.getUsername());
-        user.setAuthority(authorities.findByAuthority("ROLE_USER"));
-        users.saveUser(user);
+        users.saveUser(user, "ROLE_USER");
         return "redirect:/login";
     }
 

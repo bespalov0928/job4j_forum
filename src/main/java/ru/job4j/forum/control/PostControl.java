@@ -21,7 +21,6 @@ public class PostControl {
 
     @GetMapping("/create")
     public String createPost() {
-
         return "create";
     }
 
@@ -38,6 +37,4 @@ public class PostControl {
         model.addAttribute("post", post);
         return "edit";
     }
-
-
 }

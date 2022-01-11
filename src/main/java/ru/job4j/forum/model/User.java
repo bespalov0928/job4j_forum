@@ -19,11 +19,10 @@ public class User {
 
     private boolean enabled;
 
-    public static User of(String username, String password, Authority authority, boolean enabled) {
+   public static User of(String username, String password, boolean enabled) {
         User user = new User();
-        user.password = password;
         user.username = username;
-        user.authority = authority;
+        user.password = password;
         user.enabled = enabled;
         return user;
     }
